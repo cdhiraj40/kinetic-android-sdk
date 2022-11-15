@@ -12,7 +12,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 23
+        minSdk 26
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -65,16 +65,25 @@ task downloadApiSwagger(type: Download) {
 }
 
 task generate(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    delete "$rootDir/kinetic/src/main/java/generated"
+    def outputDir = "$rootDir/kinetic/src/main/java/openapi"
+    def targetDir = "$rootDir/kinetic/src/main/java/org/kin/kinetic/generated"
+    def templateDir = "$rootDir/.openapi-generator/templates/kotlin-client"
+
+    delete "$buildDir"
+
     dependsOn(downloadApiSwagger)
+    apiPackage = "generated"
     generatorName = "kotlin"
-    inputSpec = "$rootDir/api-swagger.json".toString()
-    outputDir = "$rootDir/kinetic/src/main/java/generated".toString()
-    apiPackage = "org.kin.kinetic.generated"
-    templateDir = "$rootDir/.openapi-generator/templates/kotlin-client"
+    inputSpec = "$rootDir/api-swagger.json"
+    outputDir = "$outputDir"
+    templateDir = "$templateDir"
     configOptions = [
             dateLibrary: "java8",
     ]
+
+    doLast {
+        ant.move file: "${outputDir}", todir: "$targetDir"
+    }
 }
 
 sourceSets {

@@ -13,7 +13,7 @@
     "UnusedImport"
 )
 
-package org.kin.kinetic.generated
+package generated
 
 import java.io.IOException
 import okhttp3.OkHttpClient

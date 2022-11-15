@@ -5,10 +5,10 @@ import org.kin.kinetic.helpers.generateCreateAccountTransaction
 import org.kin.kinetic.helpers.generateMakeTransferTransaction
 import com.solana.Solana
 import com.solana.core.*
+import generated.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
-import org.kin.kinetic.generated.*
 import org.kin.kinetic.helpers.addDecimals
 import org.openapitools.client.models.*
 import java.time.Instant
